@@ -26,26 +26,26 @@ wss.on('connection', (ws) => {
         console.log('status: ' + obj.status);
 
         switch(obj.status) {
-            case 'findPlayerName': playerName.onMessageFindPlayerName(ws, data);
-            case 'insertPlayerName': playerName.onMessageInsertPlayerName(ws, data);
-            case 'deletePlayerName': playerName.onMessageDeletePlayerName(ws, data);
-            case 'updatePlayerName': playerName.onMessageUpdatePlayerName(ws, data);
+            case 'findPlayerName': playerName.onMessageFindPlayerName(ws, data); break;
+            case 'insertPlayerName': playerName.onMessageInsertPlayerName(ws, data); break;
+            case 'deletePlayerName': playerName.onMessageDeletePlayerName(ws, data); break;
+            case 'updatePlayerName': playerName.onMessageUpdatePlayerName(ws, data); break;
 
-            case 'findPlayerLevel': playerLevel.onMessageFindPlayerLevel(ws, data);
-            case 'insertPlayerLevel': playerLevel.onMessageInsertPlayerLevel(ws, data);
-            case 'deletePlayerLevel': playerLevel.onMessageDeletePlayerLevel(ws, data);
-            case 'updatePlayerLevel': playerLevel.onMessageUpdatePlayerLevel(ws, data);
+            case 'findPlayerLevel': playerLevel.onMessageFindPlayerLevel(ws, data); break;
+            case 'insertPlayerLevel': playerLevel.onMessageInsertPlayerLevel(ws, data); break;
+            case 'deletePlayerLevel': playerLevel.onMessageDeletePlayerLevel(ws, data); break;
+            case 'updatePlayerLevel': playerLevel.onMessageUpdatePlayerLevel(ws, data); break;
 
-            case 'findPlayerGoods': playerGoods.onMessageFindPlayerGoods(ws, data);
-            case 'insertPlayerGoods': playerGoods.onMessageInsertPlayerGoods(ws, data);
-            case 'deletePlayerGoods': playerGoods.onMessageDeletePlayerGoods(ws, data);
-            case 'updatePlayerGoods': playerGoods.onMessageUpdatePlayerGoods(ws, data);
+            case 'findPlayerGoods': playerGoods.onMessageFindPlayerGoods(ws, data); break;
+            case 'insertPlayerGoods': playerGoods.onMessageInsertPlayerGoods(ws, data); break;
+            case 'deletePlayerGoods': playerGoods.onMessageDeletePlayerGoods(ws, data); break;
+            case 'updatePlayerGoods': playerGoods.onMessageUpdatePlayerGoods(ws, data); break;
 
-            case 'findPlayerItems': playerItem.onMessageFindPlayerItems(ws, data);
-            case 'insertPlayerItem': playerItem.onMessageInsertPlayerItem(ws, data);
-            case 'deletePlayerItem': playerItem.onMessageDeletePlayerItem(ws, data);
-            case 'deletePlayerItems': playerItem.onMessageDeletePlayerItems(ws, data);
-            case 'updatePlayerItem': playerItem.onMessageUpdatePlayerItem(ws, data);
+            case 'findPlayerItems': playerItem.onMessageFindPlayerItems(ws, data); break;
+            case 'insertPlayerItem': playerItem.onMessageInsertPlayerItem(ws, data); break;
+            case 'deletePlayerItem': playerItem.onMessageDeletePlayerItem(ws, data); break;
+            case 'deletePlayerItems': playerItem.onMessageDeletePlayerItems(ws, data); break;
+            case 'updatePlayerItem': playerItem.onMessageUpdatePlayerItem(ws, data); break;
 
             // 여기부터 구현 안함
 
