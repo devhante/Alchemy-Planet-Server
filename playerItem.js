@@ -8,7 +8,6 @@ exports.onMessageFindPlayerItems = (ws, data) => {
             dataObj[i] = { playerId: res[i].playerId, itemId: res[i].itemId, number: res[i].number }
         }
         let sendObj = { status: 'PlayerItem', data: JSON.stringify(dataObj) };
-        console.log(JSON.stringify(sendObj));
         ws.send(JSON.stringify(sendObj));
     });
 }

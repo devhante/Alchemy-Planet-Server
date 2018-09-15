@@ -89,10 +89,10 @@ wss.on('connection', (ws) => {
 
 // DROP
 
-// MongoClient.connect(url, { useNewUrlParser:true }, (err, db) => {
+// exports.MongoClient.connect(exports.url, { useNewUrlParser:true }, (err, db) => {
 //     if(err) throw err;
 //     let dbo = db.db('mydb');
-//     dbo.collection('StructureUpgradeInfo').drop((err, ok) => {
+//     dbo.collection('PlayerItem').drop((err, ok) => {
 //         if(err) throw err;
 //         if(ok) console.log('dropped.');
 //         db.close();
