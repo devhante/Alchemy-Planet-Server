@@ -3,7 +3,7 @@ let myQuery = require('./myQuery');
 exports.onMessageFindPlayerUpgradingStructures = (ws, data) => {
     findPlayerUpgradingStructures(data.playerId, (res) => {
         console.log('findPlayerUpgradingStructure: ' + res);
-        let dataObj;
+        let dataObj = [];
         for(let i = 0; i < res.length; i++) {
             dataObj[i] = { playerId: res[i].playerId, structureUniqueId: res[i].structureUniqueId, startDate: res[i].startDate, requireTime: res[i].requireTime };
         }
