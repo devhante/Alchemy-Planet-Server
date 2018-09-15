@@ -4,7 +4,7 @@ let playerGoods = require('./playerGoods');
 let playerItem = require('./playerItem');
 let playerStructure = require('./playerStructure');
 let playerTownStructure = require('./playerTownStructure');
-let PlayerUpgradingStructure = require('./playerUpgradingStructure');
+let playerUpgradingStructure = require('./playerUpgradingStructure');
 let playerCharcter = require('./playerCharacter');
 let playerParty = require('./playerParty');
 let playerRequest = require('./playerRequest');
@@ -57,11 +57,11 @@ wss.on('connection', (ws) => {
             case 'deletePlayerTownStructures': playerTownStructure.onMessageDeletePlayerTownStructures(ws, data);
             case 'updatePlayerTownStructure': playerTownStructure.onMessageUpdatePlayerTownStructure(ws, data);
 
-            // case 'findPlayerUpgradingStructures': PlayerUpgradingStructure.onMessageFindPlayerUpgradingStructures(ws, data);
-            // case 'insertPlayerUpgradingStructure': PlayerUpgradingStructure.onMessageInsertPlayerUpgradingStructure(ws, data);
-            // case 'deletePlayerUpgradingStructure': PlayerUpgradingStructure.onMessageDeletePlayerUpgradingStructure(ws, data);
-            // case 'deletePlayerUpgradingStructures': PlayerUpgradingStructure.onMessageDeletePlayerUpgradingStructures(ws, data);
-            // case 'updatePlayerUpgradingStructure': PlayerUpgradingStructure.onMessageUpdatePlayerUpgradingStructure(ws, data);
+            case 'findPlayerUpgradingStructures': playerUpgradingStructure.onMessageFindPlayerUpgradingStructures(ws, data);
+            case 'insertPlayerUpgradingStructure': playerUpgradingStructure.onMessageInsertPlayerUpgradingStructure(ws, data);
+            case 'deletePlayerUpgradingStructure': playerUpgradingStructure.onMessageDeletePlayerUpgradingStructure(ws, data);
+            case 'deletePlayerUpgradingStructures': playerUpgradingStructure.onMessageDeletePlayerUpgradingStructures(ws, data);
+            case 'updatePlayerUpgradingStructure': playerUpgradingStructure.onMessageUpdatePlayerUpgradingStructure(ws, data);
 
             // case 'findPlayerCharacters': playerCharcter.onMessageFindPlayerCharacters(ws, data);
             // case 'insertPlayerCharacter': playerCharcter.onMessageInsertPlayerCharacter(ws, data);
