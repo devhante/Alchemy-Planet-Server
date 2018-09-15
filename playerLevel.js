@@ -9,19 +9,19 @@ exports.onMessageFindPlayerLevel = (ws, data) => {
 }
 exports.onMessageInsertPlayerLevel = (ws, data) => {
     insertPlayerLevel(data.playerId, data.level, data.exp, (res) => {
-
+        console.log('insertPlayerLevel: ' + res);
     });
 }
 
 exports.onMessageDeletePlayerLevel = (ws, data) => {
     deletePlayerLevel(data.playerId, (obj) => {
-
+        console.log('deletePlayerLevel: ' + obj);
     });
 }
 
 exports.onMessageUpdatePlayerLevel = (ws, data) => {
     updatePlayerLevel(data.playerId, data.level, data.exp, (res) => {
-
+        console.log('updatePlayerLevel: ' + res);
     });
 }
 

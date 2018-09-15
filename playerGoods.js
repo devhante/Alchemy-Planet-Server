@@ -10,19 +10,19 @@ exports.onMessageFindPlayerGoods = (ws, data) => {
 
 exports.onMessageInsertPlayerGoods = (ws, data) => {
     insertPlayerGoods(data.playerId, data.uniCoin, data.cosmoStone, data.oxygenTank, (res) => {
-
+        console.log('insertPlayerGoods: ' + res);
     });
 }
 
 exports.onMessageDeletePlayerGoods = (ws, data) => {
     deletePlayerGoods(data.playerId, (obj) => {
-
+        console.log('deletePlayerGoods: ' + obj);
     });
 }
 
 exports.onMessageUpdatePlayerGoods = (ws, data) => {
     updatePlayerGoods(data.playerId, data.uniCoin, data.cosmoStone, data.oxygenTank, (res) => {
-
+        console.log('updatePlayerGoods: ' + res);
     });
 }
 
