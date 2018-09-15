@@ -10,19 +10,19 @@ exports.onMessageFindPlayerName = (ws, data) => {
 
 exports.onMessageInsertPlayerName = (ws, data) => {
     insertPlayerName(data.playerId, data.playerName, (res) => {
-
+        console.log('insertPlayerName: ' + res);
     });
 }
 
 exports.onMessageDeletePlayerName = (ws, data) => {
     deletePlayerName(data.playerId, (obj) => {
-
+        console.log('deletePlayerName: ' + obj);
     });
 }
 
 exports.onMessageUpdatePlayerName = (ws, data) => {
     updatePlayerName(data.playerId, data.playerName, (res) => {
-
+        console.log('updatePlayerName: ' + res)
     });
 }
 
