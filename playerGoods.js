@@ -2,7 +2,7 @@ let myQuery = require('./myQuery');
 
 exports.onMessageFindPlayerGoods = (ws, data) => {
     findPlayerGoods(data.playerId, (res) => {
-        let dataObj = { playerId: res.playerId, uniCoin: res.uniCoin, cosmoStone: res.cosmeStone, oxygenTank: res.oxygenTank };
+        let dataObj = { playerId: res.playerId, uniCoin: res.uniCoin, cosmoStone: res.cosmoStone, oxygenTank: res.oxygenTank };
         let sendObj = { status: 'PlayerGoods', data: JSON.stringify(dataObj) };
         ws.send(JSON.stringify(sendObj));
     });
@@ -41,8 +41,8 @@ const deletePlayerGoods = (playerId, callback) => {
     myQuery.deleteOne('PlayerGoods', query, callback);
 }
 
-const updatePlayerGoods = (playerId, uniCoin, cosmeStone, oxygenTank, callback) => {
+const updatePlayerGoods = (playerId, uniCoin, cosmoStone, oxygenTank, callback) => {
     let query = { playerId: playerId };
-    let values = { $set: { uniCoin: uniCoin, cosmeStone: cosmeStone, oxygenTank: oxygenTank } };
+    let values = { $set: { uniCoin: uniCoin, cosmoStone: cosmoStone, oxygenTank: oxygenTank } };
     myQuery.updateOne('PlayerGoods', query, values, callback);
 }
