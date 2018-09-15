@@ -31,7 +31,7 @@ exports.onMessageDeletePlayerUpgradingStructures = (ws, data) => {
 }
 
 exports.onMessageUpdatePlayerUpgradingStructure = (ws, data) => {
-    updatePlayerUpgradingStructure(data.playerId, data.structureUniqueId, data.startDate, data.requireDate, (res) => {
+    updatePlayerUpgradingStructure(data.playerId, data.structureUniqueId, data.startDate, data.requireTime, (res) => {
         console.log('updatePlayerUpgradingStructure: ' + res);
     });
 }
