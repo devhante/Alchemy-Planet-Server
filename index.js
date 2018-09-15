@@ -75,10 +75,10 @@ wss.on('connection', (ws) => {
             case 'deletePlayerParties': playerParty.onMessageDeletePlayerParties(ws, data);
             case 'updatePlayerParty': playerParty.onMessageUpdatePlayerParty(ws, data);
 
-            // case 'findPlayerRequests': playerRequest.onMessageFindPlayerRequests(ws, data);
-            // case 'insertPlayerRequest': playerRequest.onMessageInsertPlayerRequest(ws, data);
-            // case 'deletePlayerRequest': playerRequest.onMessageDeletePlayerRequest(ws, data);
-            // case 'deletePlayerRequests': playerRequest.onMessageDeletePlayerRequests(ws, data);
+            case 'findPlayerRequests': playerRequest.onMessageFindPlayerRequests(ws, data);
+            case 'insertPlayerRequest': playerRequest.onMessageInsertPlayerRequest(ws, data);
+            case 'deletePlayerRequest': playerRequest.onMessageDeletePlayerRequest(ws, data);
+            case 'deletePlayerRequests': playerRequest.onMessageDeletePlayerRequests(ws, data);
         }
     });
 });

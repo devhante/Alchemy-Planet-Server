@@ -1,6 +1,34 @@
 let myQuery = require('./myQuery');
 
-// TODO PlayerRequest
+exports.onMessageFindPlayerRequests = (ws, data) => {
+    findPlayerRequests(data.playerId, (res) => {
+        console.log('findPlayerRequests: ' + res);
+        let dataObj = [];
+        for(let i = 0; i < res.length; i++) {
+            dataObj[i] = { playerId: res[i].playerId, requestId: res[i].requestId };
+        }
+        let sendObj = { status: 'PlayerRequest', data: JSON.stringify(dataObj) };
+        ws.send(JSON.stringify(sendObj));
+    });
+}
+
+exports.onMessageInsertPlayerRequest = (ws, data) => {
+    insertPlayerRequest(data.playerId, data.requestId, (res) => {
+        console.log('insertPlayerRequest: ' + res);
+    });
+}
+
+exports.onMessageDeletePlayerRequest = (ws, data) => {
+    deletePlayerRequest(data.playerId, data.requestId, (obj) => {
+        console.log('deletePlayerRequest: ' + obj);
+    });
+}
+
+exports.onMessageDeletePlayerRequests = (ws, data) => {
+    deletePlayerRequests(data.playerId, (obj) => {
+        console.log('deletePlayerRequests: ' + obj );
+    });
+}
 
 const findPlayerRequests = (playerId, callback) => {
     let query = { playerId: playerId };
