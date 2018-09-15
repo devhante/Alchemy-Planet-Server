@@ -23,6 +23,8 @@ wss.on('connection', (ws) => {
         let obj = JSON.parse(message);
         let data = JSON.parse(obj.data);
 
+        console.log('status: ' + obj.status);
+
         switch(obj.status) {
             case 'findPlayerName': playerName.onMessageFindPlayerName(ws, data);
             case 'insertPlayerName': playerName.onMessageInsertPlayerName(ws, data);
