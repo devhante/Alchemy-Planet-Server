@@ -47,13 +47,11 @@ wss.on('connection', (ws) => {
             case 'deletePlayerItems': playerItem.onMessageDeletePlayerItems(ws, data); break;
             case 'updatePlayerItem': playerItem.onMessageUpdatePlayerItem(ws, data); break;
 
-            // 여기부터 구현 안함
-
-            // case 'findPlayerStructures': playerStructure.onMessageFindPlayerStructures(ws, data);
-            // case 'insertPlayerStructure': playerStructure.onMessageInsertPlayerStructure(ws, data);
-            // case 'deletePlayerStructure': playerStructure.onMessageDeletePlayerStructure(ws, data);
-            // case 'deletePlayerStructures': playerStructure.onMessageDeletePlayerStructures(ws, data);
-            // case 'updatePlayerStructure': playerStructure.onMessageUpdatePlayerStructure(ws, data);
+            case 'findPlayerStructures': playerStructure.onMessageFindPlayerStructures(ws, data);
+            case 'insertPlayerStructure': playerStructure.onMessageInsertPlayerStructure(ws, data);
+            case 'deletePlayerStructure': playerStructure.onMessageDeletePlayerStructure(ws, data);
+            case 'deletePlayerStructures': playerStructure.onMessageDeletePlayerStructures(ws, data);
+            case 'updatePlayerStructure': playerStructure.onMessageUpdatePlayerStructure(ws, data);
 
             // case 'findPlayerTownStructures': playerTownStructure.onMessageFindPlayerTownStructures(ws, data);
             // case 'insertPlayerTownStructure': playerTownStructure.onMessageInsertPlayerTownStructure(ws, data);

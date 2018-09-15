@@ -32,7 +32,7 @@ exports.onMessageDeletePlayerItems = (ws, data) => {
 
 exports.onMessageUpdatePlayerItem = (ws, data) => {
     updatePlayerItem(data.playerId, data.itemId, data.number, (res) => {
-        console.log('updatePlayerItem: res');
+        console.log('updatePlayerItem: ' + res);
     });
 }
 
