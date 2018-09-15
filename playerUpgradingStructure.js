@@ -13,7 +13,7 @@ exports.onMessageFindPlayerUpgradingStructures = (ws, data) => {
 }
 
 exports.onMessageInsertPlayerUpgradingStructure = (ws, data) => {
-    insertPlayerUpgradingStructure(data.playerId, data.structureUniqueId, data.startDate, data.requireTime, (res) => {
+    insertPlayerUpgradingStructure(data.playerId, data.structureUniqueId, data.requireTime, (res) => {
         console.log('insertPlayerUpgradingStructure: ' + res);
     });
 }
@@ -41,8 +41,8 @@ const findPlayerUpgradingStructures = (playerId, callback) => {
     myQuery.findMany('PlayerUpgradingStructure', query, callback);
 }
 
-const insertPlayerUpgradingStructure = (playerId, structureUniqueId, startDate, requireTime, callback) => {
-    let obj = { playerId: playerId, structureUniqueId: structureUniqueId, startDate: startDate, requireTime: requireTime };
+const insertPlayerUpgradingStructure = (playerId, structureUniqueId, requireTime, callback) => {
+    let obj = { playerId: playerId, structureUniqueId: structureUniqueId, startDate: Date.now(), requireTime: requireTime };
     myQuery.insertOne('PlayerUpgradingStructure', obj, callback);
 }
 
