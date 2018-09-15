@@ -1,6 +1,40 @@
 let myQuery = require('./myQuery');
 
-// TODO PlayerParty
+exports.onMessageFindPlayerParties = (ws, data) => {
+    findPlayerParties(data.playerId, (res) => {
+        console.log('findPlayerParties: ' + res);
+        let dataObj = [];
+        for(let i = 0; i < res.length; i++) {
+            dataObj[i] = { playerId: res[i].playerId, partyIndex: res[i].partyIndex, slotIndex: res[i].slotIndex, characterId: res[i].characterId };
+        }
+        let sendObj = { status: 'PlayerParty', data: JSON.stringify(dataObj) };
+        ws.send(JSON.stringify(sendObj));
+    });
+}
+
+exports.onMessageInsertPlayerParty = (ws, data) => {
+    insertPlayerParty(data.playerId, data.partyIndex, data.slotIndex, data.characterId, (res) => {
+        console.log('insertPlayerParty: ' + res);
+    });
+}
+
+exports.onMessageDeletePlayerParty = (ws, data) => {
+    deletePlayerParty(data.playerId, data.partyIndex, data.slotIndex, (obj) => {
+        console.log('deletePlayerParty: ' + obj);
+    });
+}
+
+exports.onMessageDeletePlayerParties = (ws, data) => {
+    deletePlayerParties(data.playerId, (obj) => {
+        console.log('deletePlayerParties: ' + obj);
+    });
+}
+
+exports.onMessageUpdatePlayerParty = (ws, data) => {
+    updatePlayerParty(data.playerId, data.partyIndex, data.slotIndex, data.characterId, (res) => {
+        console.log('updatePlayerParty: ' + res);
+    });
+}
 
 const findPlayerParties = (playerId, callback) => {
     let query = { playerId: playerId };

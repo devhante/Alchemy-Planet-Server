@@ -69,11 +69,11 @@ wss.on('connection', (ws) => {
             case 'deletePlayerCharacters': playerCharcter.onMessageDeletePlayerCharacters(ws, data);
             case 'updatePlayerCharacter': playerCharcter.onMessageUpdatePlayerCharacter(ws, data);
 
-            // case 'findPlayerParties': playerParty.onMessageFindPlayerParties(ws, data);
-            // case 'insertPlayerParty': playerParty.onMessageInsertPlayerParty(ws, data);
-            // case 'deletePlayerParty': playerParty.onMessageDeletePlayerParty(ws, data);
-            // case 'deletePlayerParties': playerParty.onMessageDeletePlayerParties(ws, data);
-            // case 'updatePlayerParty': playerParty.onMessageUpdatePlayerParty(ws, data);
+            case 'findPlayerParties': playerParty.onMessageFindPlayerParties(ws, data);
+            case 'insertPlayerParty': playerParty.onMessageInsertPlayerParty(ws, data);
+            case 'deletePlayerParty': playerParty.onMessageDeletePlayerParty(ws, data);
+            case 'deletePlayerParties': playerParty.onMessageDeletePlayerParties(ws, data);
+            case 'updatePlayerParty': playerParty.onMessageUpdatePlayerParty(ws, data);
 
             // case 'findPlayerRequests': playerRequest.onMessageFindPlayerRequests(ws, data);
             // case 'insertPlayerRequest': playerRequest.onMessageInsertPlayerRequest(ws, data);
