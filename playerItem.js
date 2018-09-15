@@ -2,10 +2,10 @@ let myQuery = require('./myQuery');
 
 exports.onMessageFindPlayerItems = (ws, data) => {
     findPlayerItems(data.playerId, (res) => {
-        console.log('findPlayerItems:' + res);
+        console.log('findPlayerItems: ' + res);
         let dataObj = [];
         for(let i = 0; i < res.length; i++) {
-            dataObj[i] = { playerId: res[i].playerId, itemId: res[i].itemId, number: res[i].number }
+            dataObj[i] = { playerId: res[i].playerId, itemId: res[i].itemId, number: res[i].number };
         }
         let sendObj = { status: 'PlayerItem', data: JSON.stringify(dataObj) };
         ws.send(JSON.stringify(sendObj));

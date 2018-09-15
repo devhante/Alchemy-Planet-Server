@@ -23,8 +23,6 @@ wss.on('connection', (ws) => {
         let obj = JSON.parse(message);
         let data = JSON.parse(obj.data);
 
-        console.log('status: ' + obj.status);
-
         switch(obj.status) {
             case 'findPlayerName': playerName.onMessageFindPlayerName(ws, data); break;
             case 'insertPlayerName': playerName.onMessageInsertPlayerName(ws, data); break;
@@ -53,11 +51,11 @@ wss.on('connection', (ws) => {
             case 'deletePlayerStructures': playerStructure.onMessageDeletePlayerStructures(ws, data);
             case 'updatePlayerStructure': playerStructure.onMessageUpdatePlayerStructure(ws, data);
 
-            // case 'findPlayerTownStructures': playerTownStructure.onMessageFindPlayerTownStructures(ws, data);
-            // case 'insertPlayerTownStructure': playerTownStructure.onMessageInsertPlayerTownStructure(ws, data);
-            // case 'deletePlayerTownStructure': playerTownStructure.onMessageDeletePlayerTownStructure(ws, data);
-            // case 'deletePlayerTownStructures': playerTownStructure.onMessageDeletePlayerTownStructures(ws, data);
-            // case 'updatePlayerTownStructure': playerTownStructure.onMessageUpdatePlayerTownStructure(ws, data);
+            case 'findPlayerTownStructures': playerTownStructure.onMessageFindPlayerTownStructures(ws, data);
+            case 'insertPlayerTownStructure': playerTownStructure.onMessageInsertPlayerTownStructure(ws, data);
+            case 'deletePlayerTownStructure': playerTownStructure.onMessageDeletePlayerTownStructure(ws, data);
+            case 'deletePlayerTownStructures': playerTownStructure.onMessageDeletePlayerTownStructures(ws, data);
+            case 'updatePlayerTownStructure': playerTownStructure.onMessageUpdatePlayerTownStructure(ws, data);
 
             // case 'findPlayerUpgradingStructures': PlayerUpgradingStructure.onMessageFindPlayerUpgradingStructures(ws, data);
             // case 'insertPlayerUpgradingStructure': PlayerUpgradingStructure.onMessageInsertPlayerUpgradingStructure(ws, data);
