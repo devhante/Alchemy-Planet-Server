@@ -30,7 +30,7 @@ exports.onMessageDeletePlayerItems = (ws, data) => {
 }
 
 exports.onMessageUpdatePlayerItem = (ws, data) => {
-    updatePlayerItem(data.playerId, date.itemId, date.number, (res) => {
+    updatePlayerItem(data.playerId, data.itemId, data.number, (res) => {
 
     });
 }
