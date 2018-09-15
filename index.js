@@ -85,17 +85,18 @@ wss.on('connection', (ws) => {
 
 // DROP
 
-let collections = ['PlayerName', 'PlayerLevel', 'PlayerGoods', 'PlayerItem', 'PlayerStructure', 'PlayerTownStructure', 'PlayerUpgradingStructure', 'PlayerCharacter', 'PlayerParty', 'PlayerRequest'];
+// let collections = ['PlayerName', 'PlayerLevel', 'PlayerGoods', 'PlayerItem', 'PlayerStructure', 'PlayerTownStructure', 'PlayerUpgradingStructure', 'PlayerCharacter', 'PlayerParty', 'PlayerRequest'];
 
-exports.MongoClient.connect(exports.url, { useNewUrlParser:true }, (err, db) => {
-    if(err) throw err;
-    let dbo = db.db('mydb');
-    for(let i = 0; i < collections.length; i++) {
-        dbo.collection(collections[i]).drop((err, ok) => {
-            if(err) throw err;
-            if(ok) console.log('dropped.');
-            db.close();
-        });
-    }
+// exports.MongoClient.connect(exports.url, { useNewUrlParser:true }, (err, db) => {
+//     if(err) throw err;
+//     let dbo = db.db('mydb');
+//     for(let i = 0; i < collections.length; i++) {
+//         if(dbo.collection(collections[i]).countDocuments)
+//         dbo.collection(collections[i]).drop((err, ok) => {
+//             if(err) throw err;
+//             if(ok) console.log('dropped.');
+//             db.close();
+//         });
+//     }
     
-});
+// });
