@@ -31,7 +31,7 @@ exports.onMessageDeletePlayerUpgradingStructures = (ws, data) => {
 }
 
 exports.onMessageUpdatePlayerUpgradingStructure = (ws, data) => {
-    updatePlayerUpgradingStructure(data.playerId, data.structureUniqueId, data.startDate, data.requireTime, (res) => {
+    updatePlayerUpgradingStructure(data.playerId, data.structureUniqueId, data.requireTime, (res) => {
         console.log('updatePlayerUpgradingStructure: ' + res);
     });
 }
@@ -42,7 +42,7 @@ const findPlayerUpgradingStructures = (playerId, callback) => {
 }
 
 const insertPlayerUpgradingStructure = (playerId, structureUniqueId, requireTime, callback) => {
-    let obj = { playerId: playerId, structureUniqueId: structureUniqueId, startDate: Date.now(), requireTime: requireTime };
+    let obj = { playerId: playerId, structureUniqueId: structureUniqueId, startDate: new Date(), requireTime: requireTime };
     myQuery.insertOne('PlayerUpgradingStructure', obj, callback);
 }
 
@@ -56,8 +56,8 @@ const deletePlayerUpgradingStructures = (playerId, callback) => {
     myQuery.deleteMany('PlayerUpgradingStructure', query, callback);
 }
 
-const updatePlayerUpgradingStructure = (playerId, structureUniqueId, startDate, requireTime, callback) => {
+const updatePlayerUpgradingStructure = (playerId, structureUniqueId, requireTime, callback) => {
     let query = { playerId: playerId, structureUniqueId: structureUniqueId };
-    let values = { $set: { startDate: startDate, requireTime: requireTime } };
+    let values = { $set: { requireTime: requireTime } };
     myQuery.updateOne('PlayerUpgradingStructure', query, values, callback);
 }

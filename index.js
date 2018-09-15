@@ -85,7 +85,7 @@ wss.on('connection', (ws) => {
 
 // DROP
 
-// let collections = ['PlayerName', 'PlayerLevel', 'PlayerGoods', 'PlayerItem', 'PlayerStructure', 'PlayerTownStructure', 'PlayerUpgradingStructure', 'PlayerCharacter', 'PlayerParty', 'PlayerRequest'];
+// let collections = ['PlayerUpgradingStructure'];
 
 // exports.MongoClient.connect(exports.url, { useNewUrlParser:true }, (err, db) => {
 //     if(err) throw err;
