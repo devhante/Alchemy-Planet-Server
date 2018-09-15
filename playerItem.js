@@ -3,7 +3,7 @@ let myQuery = require('./myQuery');
 exports.onMessageFindPlayerItems = (ws, data) => {
     findPlayerItems(data.playerId, (res) => {
         console.log('findPlayerItems:' + res);
-        let dataObj;
+        let dataObj = [];
         for(let i = 0; i < res.length; i++) {
             dataObj[i] = { playerId: res[i].playerId, itemId: res[i].itemId, number: res[i].number }
         }
