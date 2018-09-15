@@ -2,6 +2,7 @@ let myQuery = require('./myQuery');
 
 exports.onMessageFindPlayerName = (ws, data) => {
     findPlayerName(data.playerId, (res) => {
+        console.log('findPlayerName: ' + res);
         let dataObj = { playerId: res.playerId, playerName: res.playerName };
         let sendObj = { status: 'PlayerName', data: JSON.stringify(dataObj) };
         ws.send(JSON.stringify(sendObj));
