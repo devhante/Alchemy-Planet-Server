@@ -9,7 +9,7 @@ exports.onMessageFindPlayerGoods = (ws, data) => {
 }
 
 exports.onMessageInsertPlayerGoods = (ws, data) => {
-    insertPlayerGoods(data.playerId, data.uniCoin, data.cosmeStone, data.oxygenTank, (res) => {
+    insertPlayerGoods(data.playerId, data.uniCoin, data.cosmoStone, data.oxygenTank, (res) => {
 
     });
 }
@@ -21,7 +21,7 @@ exports.onMessageDeletePlayerGoods = (ws, data) => {
 }
 
 exports.onMessageUpdatePlayerGoods = (ws, data) => {
-    updatePlayerGoods(data.playerId, data.uniCoin, data.cosmeStone, data.oxygenTank, (res) => {
+    updatePlayerGoods(data.playerId, data.uniCoin, data.cosmoStone, data.oxygenTank, (res) => {
 
     });
 }
