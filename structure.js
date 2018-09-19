@@ -68,6 +68,6 @@ const deleteStructures = (playerId, callback) => {
 
 const updateStructure = (playerId, playerStructureId, structureId, level, position, isConstructed, isFlipped, isUpgrading, endDate, callback) => {
     let query = { playerId: playerId, playerStructureId: playerStructureId };
-    let values = { $set: { structureId: structureId, level: level, position: position, isConstructed:, isConstructed, isFlipped: isFlipped, isUpgrading: isUpgrading, endDate: endDate } };
+    let values = { $set: { structureId: structureId, level: level, position: position, isConstructed: isConstructed, isFlipped: isFlipped, isUpgrading: isUpgrading, endDate: endDate } };
     myQuery.updateOne('Structure', query, values, callback);
 }
