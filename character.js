@@ -1,36 +1,36 @@
 let myQuery = require('./myQuery');
 
-exports.onMessageFindCharacters = (ws, data) => {
+exports.onMessageFindCharacters = (ws, data, status) => {
     findCharacters(data.playerId, (res) => {
         console.log('findCharacters: ' + res);
         let dataObj = [];
         for(let i = 0; i < res.length; i++) {
             dataObj[i] = { playerId: res[i].playerId, characterId: res[i].characterId, level: res[i].level, health: res[i].health, speed: res[i].speed, attackPower: res[i].attackPower };
         }
-        let sendObj = { status: 'Character', data: JSON.stringify(dataObj) };
+        let sendObj = { status: status, data: JSON.stringify(dataObj) };
         ws.send(JSON.stringify(sendObj));
     });
 }
 
-exports.onMessageInsertCharacter = (ws, data) => {
+exports.onMessageInsertCharacter = (ws, data, status) => {
     insertCharacter(data.playerId, data.characterId, data.level, data.health, data.speed, data.attackPower, (res) => {
         console.log('insertCharacter: ' + res);
     });
 }
 
-exports.onMessageDeleteCharacter = (ws, data) => {
+exports.onMessageDeleteCharacter = (ws, data, status) => {
     deleteCharacter(data.playerId, data.characterId, (obj) => {
         console.log('deleteCharacter: ', obj);
     });
 }
 
-exports.onMessageDeleteCharacters = (ws, data) => {
+exports.onMessageDeleteCharacters = (ws, data, status) => {
     deleteCharacters(data.playerId, (obj) => {
         console.log('deleteCharacters: ' + obj);
     });
 }
 
-exports.onMessageUpdateCharacter = (ws, data) => {
+exports.onMessageUpdateCharacter = (ws, data, status) => {
     updateCharacter(data.playerId, data.characterId, data.level, data.health, data.speed, data.attackPower, (res) => {
         console.log('updateCharacter: ' + res);
     });

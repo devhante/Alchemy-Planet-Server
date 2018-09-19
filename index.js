@@ -11,8 +11,6 @@ let level = require('./level');
 let goods = require('./goods');
 let item = require('./item');
 let structure = require('./structure');
-let townStructure = require('./townStructure');
-let upgradingStructure = require('./upgradingStructure');
 let character = require('./character');
 let party = require('./party');
 let request = require('./request');
@@ -23,52 +21,54 @@ wss.on('connection', (ws) => {
         let obj = JSON.parse(message);
         let data = JSON.parse(obj.data);
 
-        switch(obj.status) {
-            case 'findPlayerName': name.onMessageFindName(ws, data); break;
-            case 'insertName': name.onMessageInsertName(ws, data); break;
-            case 'deleteName': name.onMessageDeleteName(ws, data); break;
-            case 'updateName': name.onMessageUpdateName(ws, data); break;
+        let code = obj.status.substring(0, 3);
 
-            case 'findLevel': level.onMessageFindLevel(ws, data); break;
-            case 'insertLevel': level.onMessageInsertLevel(ws, data); break;
-            case 'deleteLevel': level.onMessageDeleteLevel(ws, data); break;
-            case 'updateLevel': level.onMessageUpdateLevel(ws, data); break;
+        switch(code) {
+            case '110': name.onMessageFindName(ws, data, obj.status); break;
+            case '120': name.onMessageInsertName(ws, data, obj.status); break;
+            case '130': name.onMessageDeleteName(ws, data, obj.status); break;
+            case '140': name.onMessageUpdateName(ws, data, obj.status); break;
 
-            case 'findGoods': goods.onMessageFindGoods(ws, data); break;
-            case 'insertGoods': goods.onMessageInsertGoods(ws, data); break;
-            case 'deleteGoods': goods.onMessageDeleteGoods(ws, data); break;
-            case 'updateGoods': goods.onMessageUpdateGoods(ws, data); break;
+            case '210': level.onMessageFindLevel(ws, data, obj.status); break;
+            case '220': level.onMessageInsertLevel(ws, data, obj.status); break;
+            case '230': level.onMessageDeleteLevel(ws, data, obj.status); break;
+            case '240': level.onMessageUpdateLevel(ws, data, obj.status); break;
 
-            case 'findItems': item.onMessageFindItems(ws, data); break;
-            case 'insertItem': item.onMessageInsertItem(ws, data); break;
-            case 'deleteItem': item.onMessageDeleteItem(ws, data); break;
-            case 'deleteItems': item.onMessageDeleteItems(ws, data); break;
-            case 'updateItem': item.onMessageUpdateItem(ws, data); break;
+            case '310': goods.onMessageFindGoods(ws, data, obj.status); break;
+            case '320': goods.onMessageInsertGoods(ws, data, obj.status); break;
+            case '330': goods.onMessageDeleteGoods(ws, data, obj.status); break;
+            case '340': goods.onMessageUpdateGoods(ws, data, obj.status); break;
 
-            case 'findStructures': structure.onMessageFindStructures(ws, data); break;
-            case 'insertStructure': structure.onMessageInsertStructure(ws, data); break;
-            case 'deleteStructure': structure.onMessageDeleteStructure(ws, data); break;
-            case 'deleteStructures': structure.onMessageDeleteStructures(ws, data); break;
-            case 'updateStructure': structure.onMessageUpdateStructure(ws, data); break;
+            case '410': item.onMessageFindItems(ws, data, obj.status); break;
+            case '420': item.onMessageInsertItem(ws, data, obj.status); break;
+            case '430': item.onMessageDeleteItem(ws, data, obj.status); break;
+            case '431': item.onMessageDeleteItems(ws, data, obj.status); break;
+            case '440': item.onMessageUpdateItem(ws, data, obj.status); break;
 
-            case 'findCharacters': character.onMessageFindCharacters(ws, data); break;
-            case 'insertCharacter': character.onMessageInsertCharacter(ws, data); break;
-            case 'deleteCharacter': character.onMessageDeleteCharacter(ws, data); break;
-            case 'deleteCharacters': character.onMessageDeleteCharacters(ws, data); break;
-            case 'updateCharacter': character.onMessageUpdateCharacter(ws, data); break;
+            case '510': structure.onMessageFindStructures(ws, data, obj.status); break;
+            case '520': structure.onMessageInsertStructure(ws, data, obj.status); break;
+            case '530': structure.onMessageDeleteStructure(ws, data, obj.status); break;
+            case '531': structure.onMessageDeleteStructures(ws, data, obj.status); break;
+            case '540': structure.onMessageUpdateStructure(ws, data, obj.status); break;
 
-            case 'findParties': party.onMessageFindParties(ws, data); break;
-            case 'insertParty': party.onMessageInsertParty(ws, data); break;
-            case 'deleteParty': party.onMessageDeleteParty(ws, data); break;
-            case 'deleteParties': party.onMessageDeleteParties(ws, data); break;
-            case 'updateParty': party.onMessageUpdateParty(ws, data); break;
+            case '610': character.onMessageFindCharacters(ws, data, obj.status); break;
+            case '620': character.onMessageInsertCharacter(ws, data, obj.status); break;
+            case '630': character.onMessageDeleteCharacter(ws, data, obj.status); break;
+            case '631': character.onMessageDeleteCharacters(ws, data, obj.status); break;
+            case '640': character.onMessageUpdateCharacter(ws, data, obj.status); break;
 
-            case 'findRequests': request.onMessageFindRequests(ws, data); break;
-            case 'insertRequest': request.onMessageInsertRequest(ws, data); break;
-            case 'deleteRequest': request.onMessageDeleteRequest(ws, data); break;
-            case 'deleteRequests': request.onMessageDeleteRequests(ws, data); break;
+            case '710': party.onMessageFindParties(ws, data, obj.status); break;
+            case '720': party.onMessageInsertParty(ws, data, obj.status); break;
+            case '730': party.onMessageDeleteParty(ws, data, obj.status); break;
+            case '731': party.onMessageDeleteParties(ws, data, obj.status); break;
+            case '740': party.onMessageUpdateParty(ws, data, obj.status); break;
 
-            case 'dropCollection': onMessageDropCollection(ws, data); break;
+            case '810': request.onMessageFindRequests(ws, data, obj.status); break;
+            case '820': request.onMessageInsertRequest(ws, data, obj.status); break;
+            case '830': request.onMessageDeleteRequest(ws, data, obj.status); break;
+            case '831': request.onMessageDeleteRequests(ws, data, obj.status); break;
+
+            case '900': onMessageDropCollection(ws, data, obj.status); break;
         }
     });
 });

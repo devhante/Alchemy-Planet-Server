@@ -1,30 +1,30 @@
 let myQuery = require('./myQuery');
 
-exports.onMessageFindRequests = (ws, data) => {
+exports.onMessageFindRequests = (ws, data, status) => {
     findRequests(data.playerId, (res) => {
         console.log('findRequests: ' + res);
         let dataObj = [];
         for(let i = 0; i < res.length; i++) {
             dataObj[i] = { playerId: res[i].playerId, requestId: res[i].requestId };
         }
-        let sendObj = { status: 'Request', data: JSON.stringify(dataObj) };
+        let sendObj = { status: status, data: JSON.stringify(dataObj) };
         ws.send(JSON.stringify(sendObj));
     });
 }
 
-exports.onMessageInsertRequest = (ws, data) => {
+exports.onMessageInsertRequest = (ws, data, status) => {
     insertRequest(data.playerId, data.requestId, (res) => {
         console.log('insertRequest: ' + res);
     });
 }
 
-exports.onMessageDeleteRequest = (ws, data) => {
+exports.onMessageDeleteRequest = (ws, data, status) => {
     deleteRequest(data.playerId, data.requestId, (obj) => {
         console.log('deleteRequest: ' + obj);
     });
 }
 
-exports.onMessageDeleteRequests = (ws, data) => {
+exports.onMessageDeleteRequests = (ws, data, status) => {
     deleteRequests(data.playerId, (obj) => {
         console.log('deleteRequests: ' + obj );
     });

@@ -1,6 +1,6 @@
 let myQuery = require('./myQuery');
 
-exports.onMessageFindStructures = (ws, data) => {
+exports.onMessageFindStructures = (ws, data, status) => {
     findStructures(data.playerId, (res) => {
         console.log('findStructures: ' + res);
         let dataObj = [];
@@ -17,30 +17,30 @@ exports.onMessageFindStructures = (ws, data) => {
                 endDate: res[i].endDate
             };
         }
-        let sendObj = { status: 'Structure', data: JSON.stringify(dataObj) };
+        let sendObj = { status: status, data: JSON.stringify(dataObj) };
         ws.send(JSON.stringify(sendObj));
     });
 }
 
-exports.onMessageInsertStructure = (ws, data) => {
+exports.onMessageInsertStructure = (ws, data, status) => {
     insertStructure(data.playerId, data.playerStructureId, data.structureId, data.level, data.position, data.isConstructed, data.isFlipped, data.isUpgrading, data.endDate, (res) => {
         console.log('insertStructure: ' + res)
     });
 }
 
-exports.onMessageDeleteStructure = (ws, data) => {
+exports.onMessageDeleteStructure = (ws, data, status) => {
     deleteStructure(data.playerId, data.playerStructureId, (obj) => {
         console.log('deleteStructure: ' + obj);
     });
 }
 
-exports.onMessageDeleteStructures = (ws, data) => {
+exports.onMessageDeleteStructures = (ws, data, status) => {
     deleteStructures(data.playerId, (obj) => {
         console.log('deleteStructures: ' + obj);
     });
 }
 
-exports.onMessageUpdateStructure = (ws, data) => {
+exports.onMessageUpdateStructure = (ws, data, status) => {
     updateStructure(data.playerId, data.playerStructureId, data.structureId, data.level, data.position, data.isConstructed, dat.isFlipped, data.isUpgrading, data.endDate, (res) => {
         console.log('updateStructure: ' + res);
     });

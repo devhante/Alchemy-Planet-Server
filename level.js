@@ -1,25 +1,25 @@
 let myQuery = require('./myQuery');
 
-exports.onMessageFindLevel = (ws, data) => {
+exports.onMessageFindLevel = (ws, data, status) => {
     findLevel(data.playerId, (res) => {
         let dataObj = { playerId: res.playerId, level: res.level, exp: res.exp };
-        let sendObj = { status: 'Level', data: JSON.stringify(dataObj) };
+        let sendObj = { status: status, data: JSON.stringify(dataObj) };
         ws.send(JSON.stringify(sendObj));
     });
 }
-exports.onMessageInsertLevel = (ws, data) => {
+exports.onMessageInsertLevel = (ws, data, status) => {
     insertLevel(data.playerId, data.level, data.exp, (res) => {
         console.log('insertLevel: ' + res);
     });
 }
 
-exports.onMessageDeleteLevel = (ws, data) => {
+exports.onMessageDeleteLevel = (ws, data, status) => {
     deleteLevel(data.playerId, (obj) => {
         console.log('deleteLevel: ' + obj);
     });
 }
 
-exports.onMessageUpdateLevel = (ws, data) => {
+exports.onMessageUpdateLevel = (ws, data, status) => {
     updateLevel(data.playerId, data.level, data.exp, (res) => {
         console.log('updateLevel: ' + res);
     });

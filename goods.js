@@ -1,26 +1,26 @@
 let myQuery = require('./myQuery');
 
-exports.onMessageFindGoods = (ws, data) => {
+exports.onMessageFindGoods = (ws, data, status) => {
     findGoods(data.playerId, (res) => {
         let dataObj = { playerId: res.playerId, uniCoin: res.uniCoin, cosmoStone: res.cosmoStone, oxygenTank: res.oxygenTank };
-        let sendObj = { status: 'Goods', data: JSON.stringify(dataObj) };
+        let sendObj = { status: status, data: JSON.stringify(dataObj) };
         ws.send(JSON.stringify(sendObj));
     });
 }
 
-exports.onMessageInsertGoods = (ws, data) => {
+exports.onMessageInsertGoods = (ws, data, status) => {
     insertGoods(data.playerId, data.uniCoin, data.cosmoStone, data.oxygenTank, (res) => {
         console.log('insertGoods: ' + res);
     });
 }
 
-exports.onMessageDeleteGoods = (ws, data) => {
+exports.onMessageDeleteGoods = (ws, data, status) => {
     deleteGoods(data.playerId, (obj) => {
         console.log('deleteGoods: ' + obj);
     });
 }
 
-exports.onMessageUpdateGoods = (ws, data) => {
+exports.onMessageUpdateGoods = (ws, data, status) => {
     updateGoods(data.playerId, data.uniCoin, data.cosmoStone, data.oxygenTank, (res) => {
         console.log('updateGoods: ' + res);
     });

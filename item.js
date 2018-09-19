@@ -1,36 +1,36 @@
 let myQuery = require('./myQuery');
 
-exports.onMessageFindItems = (ws, data) => {
+exports.onMessageFindItems = (ws, data, status) => {
     findItems(data.playerId, (res) => {
         console.log('findItems: ' + res);
         let dataObj = [];
         for(let i = 0; i < res.length; i++) {
             dataObj[i] = { playerId: res[i].playerId, itemId: res[i].itemId, number: res[i].number };
         }
-        let sendObj = { status: 'Item', data: JSON.stringify(dataObj) };
+        let sendObj = { status: status, data: JSON.stringify(dataObj) };
         ws.send(JSON.stringify(sendObj));
     });
 }
 
-exports.onMessageInsertItem = (ws, data) => {
+exports.onMessageInsertItem = (ws, data, status) => {
     insertItem(data.playerId, data.itemId, data.number, (res) => {
         console.log('insertItem: ' + res);
     });
 }
 
-exports.onMessageDeleteItem = (ws, data) => {
+exports.onMessageDeleteItem = (ws, data, status) => {
     deleteItem(data.playerId, data.itemId, (obj) => {
         console.log('deleteItem: ' + obj);
     });
 }
 
-exports.onMessageDeleteItems = (ws, data) => {
+exports.onMessageDeleteItems = (ws, data, status) => {
     deleteItems(data.playerId, (obj) => {
         console.log('deleteItems: ' + obj);
     });
 }
 
-exports.onMessageUpdateItem = (ws, data) => {
+exports.onMessageUpdateItem = (ws, data, status) => {
     updateItem(data.playerId, data.itemId, data.number, (res) => {
         console.log('updateItem: ' + res);
     });
