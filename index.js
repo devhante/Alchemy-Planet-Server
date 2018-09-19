@@ -1,14 +1,3 @@
-let playerName = require('./playerName');
-let playerLevel = require('./playerLevel');
-let playerGoods = require('./playerGoods');
-let playerItem = require('./playerItem');
-let playerStructure = require('./playerStructure');
-let playerTownStructure = require('./playerTownStructure');
-let playerUpgradingStructure = require('./playerUpgradingStructure');
-let playerCharcter = require('./playerCharacter');
-let playerParty = require('./playerParty');
-let playerRequest = require('./playerRequest');
-
 let WebSocketServer = require('ws').Server;
 let wss = new WebSocketServer({ port : 3000 });
 
@@ -17,6 +6,17 @@ exports.url = 'mongodb://localhost:27017/';
 
 console.log('Server running on port 3000');
 
+let name = require('./name');
+let level = require('./level');
+let goods = require('./goods');
+let item = require('./item');
+let structure = require('./structure');
+let townStructure = require('./townStructure');
+let upgradingStructure = require('./upgradingStructure');
+let character = require('./character');
+let party = require('./party');
+let request = require('./request');
+
 wss.on('connection', (ws) => {
     console.log('Client connected.');
     ws.on('message', (message) => {
@@ -24,79 +24,87 @@ wss.on('connection', (ws) => {
         let data = JSON.parse(obj.data);
 
         switch(obj.status) {
-            case 'findPlayerName': playerName.onMessageFindPlayerName(ws, data); break;
-            case 'insertPlayerName': playerName.onMessageInsertPlayerName(ws, data); break;
-            case 'deletePlayerName': playerName.onMessageDeletePlayerName(ws, data); break;
-            case 'updatePlayerName': playerName.onMessageUpdatePlayerName(ws, data); break;
+            case 'findPlayerName': name.onMessageFindName(ws, data); break;
+            case 'insertName': name.onMessageInsertName(ws, data); break;
+            case 'deleteName': name.onMessageDeleteName(ws, data); break;
+            case 'updateName': name.onMessageUpdateName(ws, data); break;
 
-            case 'findPlayerLevel': playerLevel.onMessageFindPlayerLevel(ws, data); break;
-            case 'insertPlayerLevel': playerLevel.onMessageInsertPlayerLevel(ws, data); break;
-            case 'deletePlayerLevel': playerLevel.onMessageDeletePlayerLevel(ws, data); break;
-            case 'updatePlayerLevel': playerLevel.onMessageUpdatePlayerLevel(ws, data); break;
+            case 'findLevel': level.onMessageFindLevel(ws, data); break;
+            case 'insertLevel': level.onMessageInsertLevel(ws, data); break;
+            case 'deleteLevel': level.onMessageDeleteLevel(ws, data); break;
+            case 'updateLevel': level.onMessageUpdateLevel(ws, data); break;
 
-            case 'findPlayerGoods': playerGoods.onMessageFindPlayerGoods(ws, data); break;
-            case 'insertPlayerGoods': playerGoods.onMessageInsertPlayerGoods(ws, data); break;
-            case 'deletePlayerGoods': playerGoods.onMessageDeletePlayerGoods(ws, data); break;
-            case 'updatePlayerGoods': playerGoods.onMessageUpdatePlayerGoods(ws, data); break;
+            case 'findGoods': goods.onMessageFindGoods(ws, data); break;
+            case 'insertGoods': goods.onMessageInsertGoods(ws, data); break;
+            case 'deleteGoods': goods.onMessageDeleteGoods(ws, data); break;
+            case 'updateGoods': goods.onMessageUpdateGoods(ws, data); break;
 
-            case 'findPlayerItems': playerItem.onMessageFindPlayerItems(ws, data); break;
-            case 'insertPlayerItem': playerItem.onMessageInsertPlayerItem(ws, data); break;
-            case 'deletePlayerItem': playerItem.onMessageDeletePlayerItem(ws, data); break;
-            case 'deletePlayerItems': playerItem.onMessageDeletePlayerItems(ws, data); break;
-            case 'updatePlayerItem': playerItem.onMessageUpdatePlayerItem(ws, data); break;
+            case 'findItems': item.onMessageFindItems(ws, data); break;
+            case 'insertItem': item.onMessageInsertItem(ws, data); break;
+            case 'deleteItem': item.onMessageDeleteItem(ws, data); break;
+            case 'deleteItems': item.onMessageDeleteItems(ws, data); break;
+            case 'updateItem': item.onMessageUpdateItem(ws, data); break;
 
-            case 'findPlayerStructures': playerStructure.onMessageFindPlayerStructures(ws, data); break;
-            case 'insertPlayerStructure': playerStructure.onMessageInsertPlayerStructure(ws, data); break;
-            case 'deletePlayerStructure': playerStructure.onMessageDeletePlayerStructure(ws, data); break;
-            case 'deletePlayerStructures': playerStructure.onMessageDeletePlayerStructures(ws, data); break;
-            case 'updatePlayerStructure': playerStructure.onMessageUpdatePlayerStructure(ws, data); break;
+            case 'findStructures': structure.onMessageFindStructures(ws, data); break;
+            case 'insertStructure': structure.onMessageInsertStructure(ws, data); break;
+            case 'deleteStructure': structure.onMessageDeleteStructure(ws, data); break;
+            case 'deleteStructures': structure.onMessageDeleteStructures(ws, data); break;
+            case 'updateStructure': structure.onMessageUpdateStructure(ws, data); break;
 
-            case 'findPlayerTownStructures': playerTownStructure.onMessageFindPlayerTownStructures(ws, data); break;
-            case 'insertPlayerTownStructure': playerTownStructure.onMessageInsertPlayerTownStructure(ws, data); break;
-            case 'deletePlayerTownStructure': playerTownStructure.onMessageDeletePlayerTownStructure(ws, data); break;
-            case 'deletePlayerTownStructures': playerTownStructure.onMessageDeletePlayerTownStructures(ws, data); break;
-            case 'updatePlayerTownStructure': playerTownStructure.onMessageUpdatePlayerTownStructure(ws, data); break;
+            case 'findTownStructures': townStructure.onMessageFindTownStructures(ws, data); break;
+            case 'insertTownStructure': townStructure.onMessageInsertTownStructure(ws, data); break;
+            case 'deleteTownStructure': townStructure.onMessageDeleteTownStructure(ws, data); break;
+            case 'deleteTownStructures': townStructure.onMessageDeleteTownStructures(ws, data); break;
+            case 'updateTownStructure': townStructure.onMessageUpdateTownStructure(ws, data); break;
 
-            case 'findPlayerUpgradingStructures': playerUpgradingStructure.onMessageFindPlayerUpgradingStructures(ws, data); break;
-            case 'insertPlayerUpgradingStructure': playerUpgradingStructure.onMessageInsertPlayerUpgradingStructure(ws, data); break;
-            case 'deletePlayerUpgradingStructure': playerUpgradingStructure.onMessageDeletePlayerUpgradingStructure(ws, data); break;
-            case 'deletePlayerUpgradingStructures': playerUpgradingStructure.onMessageDeletePlayerUpgradingStructures(ws, data); break;
-            case 'updatePlayerUpgradingStructure': playerUpgradingStructure.onMessageUpdatePlayerUpgradingStructure(ws, data); break;
+            case 'findUpgradingStructures': upgradingStructure.onMessageFindUpgradingStructures(ws, data); break;
+            case 'insertUpgradingStructure': upgradingStructure.onMessageInsertUpgradingStructure(ws, data); break;
+            case 'deleteUpgradingStructure': upgradingStructure.onMessageDeleteUpgradingStructure(ws, data); break;
+            case 'deleteUpgradingStructures': upgradingStructure.onMessageDeleteUpgradingStructures(ws, data); break;
+            case 'updateUpgradingStructure': upgradingStructure.onMessageUpdateUpgradingStructure(ws, data); break;
 
-            case 'findPlayerCharacters': playerCharcter.onMessageFindPlayerCharacters(ws, data); break;
-            case 'insertPlayerCharacter': playerCharcter.onMessageInsertPlayerCharacter(ws, data); break;
-            case 'deletePlayerCharacter': playerCharcter.onMessageDeletePlayerCharacter(ws, data); break;
-            case 'deletePlayerCharacters': playerCharcter.onMessageDeletePlayerCharacters(ws, data); break;
-            case 'updatePlayerCharacter': playerCharcter.onMessageUpdatePlayerCharacter(ws, data); break;
+            case 'findCharacters': character.onMessageFindCharacters(ws, data); break;
+            case 'insertCharacter': character.onMessageInsertCharacter(ws, data); break;
+            case 'deleteCharacter': character.onMessageDeleteCharacter(ws, data); break;
+            case 'deleteCharacters': character.onMessageDeleteCharacters(ws, data); break;
+            case 'updateCharacter': character.onMessageUpdateCharacter(ws, data); break;
 
-            case 'findPlayerParties': playerParty.onMessageFindPlayerParties(ws, data); break;
-            case 'insertPlayerParty': playerParty.onMessageInsertPlayerParty(ws, data); break;
-            case 'deletePlayerParty': playerParty.onMessageDeletePlayerParty(ws, data); break;
-            case 'deletePlayerParties': playerParty.onMessageDeletePlayerParties(ws, data); break;
-            case 'updatePlayerParty': playerParty.onMessageUpdatePlayerParty(ws, data); break;
+            case 'findParties': party.onMessageFindParties(ws, data); break;
+            case 'insertParty': party.onMessageInsertParty(ws, data); break;
+            case 'deleteParty': party.onMessageDeleteParty(ws, data); break;
+            case 'deleteParties': party.onMessageDeleteParties(ws, data); break;
+            case 'updateParty': party.onMessageUpdateParty(ws, data); break;
 
-            case 'findPlayerRequests': playerRequest.onMessageFindPlayerRequests(ws, data); break;
-            case 'insertPlayerRequest': playerRequest.onMessageInsertPlayerRequest(ws, data); break;
-            case 'deletePlayerRequest': playerRequest.onMessageDeletePlayerRequest(ws, data); break;
-            case 'deletePlayerRequests': playerRequest.onMessageDeletePlayerRequests(ws, data); break;
+            case 'findRequests': request.onMessageFindRequests(ws, data); break;
+            case 'insertRequest': request.onMessageInsertRequest(ws, data); break;
+            case 'deleteRequest': request.onMessageDeleteRequest(ws, data); break;
+            case 'deleteRequests': request.onMessageDeleteRequests(ws, data); break;
+
+            case 'dropCollection': onMessageDropCollection(ws, data); break;
         }
     });
 });
 
 // DROP
 
-// let collections = ['PlayerUpgradingStructure'];
+const onMessageDropCollection = (ws, data) => {
+    exports.MongoClient.connect(exports.url, { useNewUrlParser:true }, (err, db) => {
+        if(err) throw err;
+        let dbo = db.db('mydb');
+        dbo.collection(data).drop((err, ok) => {
+            if(err) throw err;
+            if(ok) console.log(data + ' dropped.');
+            db.close();
+        });
+    });
+}
 
 // exports.MongoClient.connect(exports.url, { useNewUrlParser:true }, (err, db) => {
 //     if(err) throw err;
 //     let dbo = db.db('mydb');
-//     for(let i = 0; i < collections.length; i++) {
-//         if(dbo.collection(collections[i]).countDocuments)
-//         dbo.collection(collections[i]).drop((err, ok) => {
-//             if(err) throw err;
-//             if(ok) console.log('dropped.');
-//             db.close();
-//         });
-//     }
-    
+//     dbo.collection('PlayerName').drop((err, ok) => {
+//         if(err) throw err;
+//         console.log('dropped.');
+//         db.close();
+//     });
 // });
