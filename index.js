@@ -51,18 +51,6 @@ wss.on('connection', (ws) => {
             case 'deleteStructures': structure.onMessageDeleteStructures(ws, data); break;
             case 'updateStructure': structure.onMessageUpdateStructure(ws, data); break;
 
-            case 'findTownStructures': townStructure.onMessageFindTownStructures(ws, data); break;
-            case 'insertTownStructure': townStructure.onMessageInsertTownStructure(ws, data); break;
-            case 'deleteTownStructure': townStructure.onMessageDeleteTownStructure(ws, data); break;
-            case 'deleteTownStructures': townStructure.onMessageDeleteTownStructures(ws, data); break;
-            case 'updateTownStructure': townStructure.onMessageUpdateTownStructure(ws, data); break;
-
-            case 'findUpgradingStructures': upgradingStructure.onMessageFindUpgradingStructures(ws, data); break;
-            case 'insertUpgradingStructure': upgradingStructure.onMessageInsertUpgradingStructure(ws, data); break;
-            case 'deleteUpgradingStructure': upgradingStructure.onMessageDeleteUpgradingStructure(ws, data); break;
-            case 'deleteUpgradingStructures': upgradingStructure.onMessageDeleteUpgradingStructures(ws, data); break;
-            case 'updateUpgradingStructure': upgradingStructure.onMessageUpdateUpgradingStructure(ws, data); break;
-
             case 'findCharacters': character.onMessageFindCharacters(ws, data); break;
             case 'insertCharacter': character.onMessageInsertCharacter(ws, data); break;
             case 'deleteCharacter': character.onMessageDeleteCharacter(ws, data); break;
