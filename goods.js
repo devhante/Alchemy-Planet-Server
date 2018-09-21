@@ -1,3 +1,4 @@
+let index = require('./index');
 let myQuery = require('./myQuery');
 
 exports.onMessageFindGoods = (ws, data, status) => {
@@ -46,3 +47,13 @@ const updateGoods = (playerId, uniCoin, cosmoStone, oxygenTank, callback) => {
     let values = { $set: { uniCoin: uniCoin, cosmoStone: cosmoStone, oxygenTank: oxygenTank } };
     myQuery.updateOne('Goods', query, values, callback);
 }
+
+index.MongoClient.connect(index.url, { useNewUrlParser: true }, (err, db) => {
+    if(err) throw err;
+    let dbo = db.db('mydb');
+    dbo.createCollection('Goods', (err, res) => {
+        if(err) throw err;
+        dbo.collection('Goods').createIndex( { playerId: 1 }, { unique: true } );
+        db.close();
+    });
+});

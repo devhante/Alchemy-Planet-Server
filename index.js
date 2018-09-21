@@ -75,22 +75,22 @@ wss.on('connection', (ws) => {
 
 // DROP
 
-const onMessageDropCollection = (ws, data) => {
-    exports.MongoClient.connect(exports.url, { useNewUrlParser:true }, (err, db) => {
-        if(err) throw err;
-        let dbo = db.db('mydb');
-        dbo.collection(data).drop((err, ok) => {
-            if(err) throw err;
-            if(ok) console.log(data + ' dropped.');
-            db.close();
-        });
-    });
-}
+// const onMessageDropCollection = (ws, data) => {
+//     exports.MongoClient.connect(exports.url, { useNewUrlParser:true }, (err, db) => {
+//         if(err) throw err;
+//         let dbo = db.db('mydb');
+//         dbo.collection(data).drop((err, ok) => {
+//             if(err) throw err;
+//             if(ok) console.log(data + ' dropped.');
+//             db.close();
+//         });
+//     });
+// }
 
 // exports.MongoClient.connect(exports.url, { useNewUrlParser:true }, (err, db) => {
 //     if(err) throw err;
 //     let dbo = db.db('mydb');
-//     dbo.collection('PlayerName').drop((err, ok) => {
+//     dbo.collection('Item').drop((err, ok) => {
 //         if(err) throw err;
 //         console.log('dropped.');
 //         db.close();

@@ -1,3 +1,4 @@
+let index = require('./index');
 let myQuery = require('./myQuery');
 
 exports.onMessageFindRequests = (ws, data, status) => {
@@ -49,3 +50,13 @@ const deleteRequests = (playerId, callback) => {
     let query = { playerId: playerId };
     myQuery.deleteMany('Request', query, callback);
 }
+
+index.MongoClient.connect(index.url, { useNewUrlParser: true }, (err, db) => {
+    if(err) throw err;
+    let dbo = db.db('mydb');
+    dbo.createCollection('Request', (err, res) => {
+        if(err) throw err;
+        dbo.collection('Request').createIndex( { playerId: 1, requestId: 1 }, { unique: true } );
+        db.close();
+    });
+});

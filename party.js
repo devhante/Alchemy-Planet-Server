@@ -1,3 +1,4 @@
+let index = require('./index');
 let myQuery = require('./myQuery');
 
 exports.onMessageFindParties = (ws, data, status) => {
@@ -61,3 +62,13 @@ const updateParty = (playerId, partyIndex, slotIndex, characterId, callback) => 
     let values = { $set: { characterId: characterId } };
     myQuery.updateOne('Party', query, values, callback);
 }
+
+index.MongoClient.connect(index.url, { useNewUrlParser: true }, (err, db) => {
+    if(err) throw err;
+    let dbo = db.db('mydb');
+    dbo.createCollection('Party', (err, res) => {
+        if(err) throw err;
+        dbo.collection('Party').createIndex( { playerId: 1, partyIndex: 1, slotIndex: 1 }, { unique: true } );
+        db.close();
+    });
+});

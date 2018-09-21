@@ -1,3 +1,4 @@
+let index = require('./index');
 let myQuery = require('./myQuery');
 
 exports.onMessageFindLevel = (ws, data, status) => {
@@ -45,3 +46,13 @@ const updateLevel = (playerId, level, exp, callback) => {
     let values = { $set: { level: level, exp: exp } };
     myQuery.updateOne('Level', query, values, callback);
 }
+
+index.MongoClient.connect(index.url, { useNewUrlParser: true }, (err, db) => {
+    if(err) throw err;
+    let dbo = db.db('mydb');
+    dbo.createCollection('Level', (err, res) => {
+        if(err) throw err;
+        dbo.collection('Level').createIndex( { playerId: 1 }, { unique: true } );
+        db.close();
+    });
+});

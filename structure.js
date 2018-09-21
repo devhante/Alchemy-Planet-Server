@@ -1,3 +1,4 @@
+let index = require('./index');
 let myQuery = require('./myQuery');
 
 exports.onMessageFindStructures = (ws, data, status) => {
@@ -71,3 +72,13 @@ const updateStructure = (playerId, playerStructureId, structureId, level, positi
     let values = { $set: { structureId: structureId, level: level, position: position, isConstructed: isConstructed, isFlipped: isFlipped, isUpgrading: isUpgrading, endDate: endDate } };
     myQuery.updateOne('Structure', query, values, callback);
 }
+
+index.MongoClient.connect(index.url, { useNewUrlParser: true }, (err, db) => {
+    if(err) throw err;
+    let dbo = db.db('mydb');
+    dbo.createCollection('Structure', (err, res) => {
+        if(err) throw err;
+        dbo.collection('Structure').createIndex( { playerId: 1, playerStructureId: 1 }, { unique: true } );
+        db.close();
+    });
+});

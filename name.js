@@ -49,7 +49,7 @@ const updateName = (playerId, playerName, callback) => {
     myQuery.updateOne('Name', query, values, callback);
 }
 
-index.MongoClient.connect(index.url, { useNewUrlParser:true }, (err, db) => {
+index.MongoClient.connect(index.url, { useNewUrlParser: true }, (err, db) => {
     if(err) throw err;
     let dbo = db.db('mydb');
     dbo.createCollection('Name', (err, res) => {

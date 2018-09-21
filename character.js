@@ -1,3 +1,4 @@
+let index = require('./index');
 let myQuery = require('./myQuery');
 
 exports.onMessageFindCharacters = (ws, data, status) => {
@@ -61,3 +62,13 @@ const updateCharacter = (playerId, characterId, level, health, speed, attackPowe
     let values = { $set: { level: level, health: health, speed: speed, attackPower: attackPower } };
     myQuery.updateOne('Character', query, values, callback);
 }
+
+index.MongoClient.connect(index.url, { useNewUrlParser: true }, (err, db) => {
+    if(err) throw err;
+    let dbo = db.db('mydb');
+    dbo.createCollection('Character', (err, res) => {
+        if(err) throw err;
+        dbo.collection('Character').createIndex( { playerId: 1, characterId: 1 }, { unique: true } );
+        db.close();
+    });
+});
