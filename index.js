@@ -14,6 +14,7 @@ let structure = require('./structure');
 let character = require('./character');
 let party = require('./party');
 let request = require('./request');
+let storyStar = require('./storyStar');
 
 wss.on('connection', (ws) => {
     console.log('Client connected.');
@@ -68,7 +69,13 @@ wss.on('connection', (ws) => {
             case '830': request.onMessageDeleteRequest(ws, data, obj.status); break;
             case '831': request.onMessageDeleteRequests(ws, data, obj.status); break;
 
-            case '900': onMessageDropCollection(ws, data, obj.status); break;
+            case '910': storyStar.onMessageFindStoryStars(ws, data, obj.status); break;
+            case '920': storyStar.onMessageInsertStoryStar(ws, data, obj.status); break;
+            case '930': storyStar.onMessageDeleteStoryStar(ws, data, obj.status); break;
+            case '931': storyStar.onMessageDeleteStoryStars(ws, data, obj.status); break;
+            case '940': storyStar.onMessageUpdateStoryStar(ws, data, obj.status); break;
+
+            case '000': onMessageDropCollection(ws, data, obj.status); break;
         }
     });
 });
