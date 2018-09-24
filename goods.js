@@ -3,8 +3,13 @@ let myQuery = require('./myQuery');
 
 exports.onMessageFindGoods = (ws, data, status) => {
     findGoods(data.playerId, (res) => {
-        let dataObj = { playerId: res.playerId, uniCoin: res.uniCoin, cosmoStone: res.cosmoStone, oxygenTank: res.oxygenTank };
-        let sendObj = { status: status, data: JSON.stringify(dataObj) };
+        let sendObj;
+        if(res == null) {
+            sendObj = { status: status, data: null };
+        } else {
+            let dataObj = { playerId: res.playerId, uniCoin: res.uniCoin, cosmoStone: res.cosmoStone, oxygenTank: res.oxygenTank };
+            sendObj = { status: status, data: JSON.stringify(dataObj) };
+        }
         ws.send(JSON.stringify(sendObj));
     });
 }

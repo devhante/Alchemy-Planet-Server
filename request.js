@@ -5,10 +5,15 @@ exports.onMessageFindRequests = (ws, data, status) => {
     findRequests(data.playerId, (res) => {
         console.log('findRequests: ' + res);
         let dataObj = [];
-        for(let i = 0; i < res.length; i++) {
-            dataObj[i] = { playerId: res[i].playerId, requestId: res[i].requestId };
+        let sendObj;
+        if(res == null) {
+            sendObj = { status: status, data: null };
+        } else {
+            for(let i = 0; i < res.length; i++) {
+                dataObj[i] = { playerId: res[i].playerId, requestId: res[i].requestId };
+            }
+            sendObj = { status: status, data: JSON.stringify(dataObj) };
         }
-        let sendObj = { status: status, data: JSON.stringify(dataObj) };
         ws.send(JSON.stringify(sendObj));
     });
 }

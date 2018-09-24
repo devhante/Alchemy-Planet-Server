@@ -4,8 +4,13 @@ let myQuery = require('./myQuery');
 exports.onMessageFindName = (ws, data, status) => {
     findName(data.playerId, (res) => {
         console.log('findName: ' + res);
-        let dataObj = { playerId: res.playerId, playerName: res.playerName };
-        let sendObj = { status: status, data: JSON.stringify(dataObj) };
+        let sendObj;
+        if(res == null) {
+            sendObj = { status: status, data: null };
+        } else {
+            let dataObj = { playerId: res.playerId, playerName: res.playerName };
+            sendObj = { status: status, data: JSON.stringify(dataObj) };
+        }
         ws.send(JSON.stringify(sendObj));
     });
 }

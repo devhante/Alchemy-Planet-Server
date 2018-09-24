@@ -5,10 +5,15 @@ exports.onMessageFindParties = (ws, data, status) => {
     findParties(data.playerId, (res) => {
         console.log('findParties: ' + res);
         let dataObj = [];
-        for(let i = 0; i < res.length; i++) {
-            dataObj[i] = { playerId: res[i].playerId, partyIndex: res[i].partyIndex, slotIndex: res[i].slotIndex, characterId: res[i].characterId };
+        let sendObj;
+        if(res == null) {
+            sendObj = { status: status, data: null };
+        } else {
+            for(let i = 0; i < res.length; i++) {
+                dataObj[i] = { playerId: res[i].playerId, partyIndex: res[i].partyIndex, slotIndex: res[i].slotIndex, characterId: res[i].characterId };
+            }
+            sendObj = { status: status, data: JSON.stringify(dataObj) };
         }
-        let sendObj = { status: status, data: JSON.stringify(dataObj) };
         ws.send(JSON.stringify(sendObj));
     });
 }

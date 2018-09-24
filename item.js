@@ -5,10 +5,15 @@ exports.onMessageFindItems = (ws, data, status) => {
     findItems(data.playerId, (res) => {
         console.log('findItems: ' + res);
         let dataObj = [];
-        for(let i = 0; i < res.length; i++) {
-            dataObj[i] = { playerId: res[i].playerId, itemId: res[i].itemId, number: res[i].number };
+        let sendObj;
+        if(res == null) {
+            sendObj = { status: status, data: null };
+        } else {
+            for(let i = 0; i < res.length; i++) {
+                dataObj[i] = { playerId: res[i].playerId, itemId: res[i].itemId, number: res[i].number };
+            }
+            sendObj = { status: status, data: JSON.stringify(dataObj) };
         }
-        let sendObj = { status: status, data: JSON.stringify(dataObj) };
         ws.send(JSON.stringify(sendObj));
     });
 }

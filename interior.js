@@ -5,17 +5,22 @@ exports.onMessageFindInteriors = (ws, data, status) => {
     findInteriors(data.playerId, (res) => {
         console.log('findInteriors: ' + res);
         let dataObj = [];
-        for(let i = 0; i < res.length; i++) {
-            dataObj[i] = {
-                playerId: res[i].playerId,
-                playerInteriorId: res[i].playerInteriorId,
-                interiorId: res[i].interiorId,
-                position: res[i].position,
-                isConstructed: res[i].isConstructed,
-                isFlipped: res[i].isFlipped,
-            };
+        let sendObj;
+        if(res == null) {
+            sendObj = { status: status, data: null };
+        } else {
+            for(let i = 0; i < res.length; i++) {
+                dataObj[i] = {
+                    playerId: res[i].playerId,
+                    playerInteriorId: res[i].playerInteriorId,
+                    interiorId: res[i].interiorId,
+                    position: res[i].position,
+                    isConstructed: res[i].isConstructed,
+                    isFlipped: res[i].isFlipped,
+                };
+            }
+            sendObj = { status: status, data: JSON.stringify(dataObj) };
         }
-        let sendObj = { status: status, data: JSON.stringify(dataObj) };
         ws.send(JSON.stringify(sendObj));
     });
 }

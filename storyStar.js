@@ -5,10 +5,15 @@ exports.onMessageFindStoryStars = (ws, data, status) => {
     findStoryStars(data.playerId, (res) => {
         console.log('findStoryStars: ' + res);
         let dataObj = [];
-        for(let i = 0; i < res.length; i++) {
-            dataObj[i] = { playerId: res[i].playerId, stageNumber: res[i].stageNumber, number: res[i].number };
+        let sendObj;
+        if(res == null) {
+            sendObj = { status: status, data: null };
+        } else {
+            for(let i = 0; i < res.length; i++) {
+                dataObj[i] = { playerId: res[i].playerId, stageNumber: res[i].stageNumber, number: res[i].number };
+            }
+            sendObj = { status: status, data: JSON.stringify(dataObj) };
         }
-        let sendObj = { status: status, data: JSON.stringify(dataObj) };
         ws.send(JSON.stringify(sendObj));
     });
 }
@@ -16,6 +21,8 @@ exports.onMessageFindStoryStars = (ws, data, status) => {
 exports.onMessageInsertStoryStar = (ws, data, status) => {
     insertStoryStar(data.playerId, data.stageNumber, data.number, (res) => {
         console.log('insertStoryStar: ' + res);
+        let sendObj = { status: status, data: ""};
+        ws.send(JSON.stringify(sendObj));
     });
 }
 

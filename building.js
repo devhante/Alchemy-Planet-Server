@@ -5,20 +5,25 @@ exports.onMessageFindBuildings = (ws, data, status) => {
     findBuildings(data.playerId, (res) => {
         console.log('findBuildings: ' + res);
         let dataObj = [];
-        for(let i = 0; i < res.length; i++) {
-            dataObj[i] = {
-                playerId: res[i].playerId,
-                playerBuildingId: res[i].playerBuildingId,
-                buildingId: res[i].buildingId,
-                level: res[i].level,
-                position: res[i].position,
-                isConstructed: res[i].isConstructed,
-                isFlipped: res[i].isFlipped,
-                isUpgrading: res[i].isUpgrading,
-                endDate: res[i].endDate
-            };
+        let sendObj;
+        if(res == null) {
+            sendObj = { status: status, data: null };
+        } else {
+            for(let i = 0; i < res.length; i++) {
+                dataObj[i] = {
+                    playerId: res[i].playerId,
+                    playerBuildingId: res[i].playerBuildingId,
+                    buildingId: res[i].buildingId,
+                    level: res[i].level,
+                    position: res[i].position,
+                    isConstructed: res[i].isConstructed,
+                    isFlipped: res[i].isFlipped,
+                    isUpgrading: res[i].isUpgrading,
+                    endDate: res[i].endDate
+                };
+            }
+            sendObj = { status: status, data: JSON.stringify(dataObj) };
         }
-        let sendObj = { status: status, data: JSON.stringify(dataObj) };
         ws.send(JSON.stringify(sendObj));
     });
 }
@@ -42,7 +47,7 @@ exports.onMessageDeleteBuildings = (ws, data, status) => {
 }
 
 exports.onMessageUpdateBuilding = (ws, data, status) => {
-    updateBuilding(data.playerId, data.playerBuildingId, data.buildingId, data.level, data.position, data.isConstructed, dat.isFlipped, data.isUpgrading, data.endDate, (res) => {
+    updateBuilding(data.playerId, data.playerBuildingId, data.buildingId, data.level, data.position, data.isConstructed, data.isFlipped, data.isUpgrading, data.endDate, (res) => {
         console.log('updateBuilding: ' + res);
     });
 }

@@ -5,10 +5,15 @@ exports.onMessageFindCharacters = (ws, data, status) => {
     findCharacters(data.playerId, (res) => {
         console.log('findCharacters: ' + res);
         let dataObj = [];
-        for(let i = 0; i < res.length; i++) {
-            dataObj[i] = { playerId: res[i].playerId, characterId: res[i].characterId, level: res[i].level, health: res[i].health, speed: res[i].speed, attackPower: res[i].attackPower };
+        let sendObj;
+        if(res == null) {
+            sendObj = { status: status, data: null };
+        } else {
+            for(let i = 0; i < res.length; i++) {
+                dataObj[i] = { playerId: res[i].playerId, characterId: res[i].characterId, level: res[i].level, health: res[i].health, speed: res[i].speed, attackPower: res[i].attackPower };
+            }
+            sendObj = { status: status, data: JSON.stringify(dataObj) };
         }
-        let sendObj = { status: status, data: JSON.stringify(dataObj) };
         ws.send(JSON.stringify(sendObj));
     });
 }

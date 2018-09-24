@@ -3,8 +3,13 @@ let myQuery = require('./myQuery');
 
 exports.onMessageFindLevel = (ws, data, status) => {
     findLevel(data.playerId, (res) => {
-        let dataObj = { playerId: res.playerId, level: res.level, exp: res.exp };
-        let sendObj = { status: status, data: JSON.stringify(dataObj) };
+        let sendObj;
+        if(res == null) {
+            sendObj = { status: status, data: null };
+        } else {
+            let dataObj = { playerId: res.playerId, level: res.level, exp: res.exp };
+            sendObj = { status: status, data: JSON.stringify(dataObj) };
+        }
         ws.send(JSON.stringify(sendObj));
     });
 }

@@ -6,7 +6,7 @@ exports.findOne = (collectionName, query, callback) => {
         let dbo = db.db('mydb');
         dbo.collection(collectionName).findOne(query, (err, res) => {
             if(err) throw err;
-            callback(res);
+            else callback(res);
             db.close();
         });
     });
