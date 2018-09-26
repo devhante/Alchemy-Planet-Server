@@ -44,7 +44,7 @@ exports.onMessageDeleteInteriors = (ws, data, status) => {
 }
 
 exports.onMessageUpdateInterior = (ws, data, status) => {
-    updateInterior(data.playerId, data.playerInteriorId, data.interiorId, data.position, data.isConstructed, dat.isFlipped, (res) => {
+    updateInterior(data.playerId, data.playerInteriorId, data.interiorId, data.position, data.isConstructed, data.isFlipped, (res) => {
         console.log('updateInterior: ' + res);
     });
 }
